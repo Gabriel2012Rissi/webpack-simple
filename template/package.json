@@ -1,9 +1,9 @@
 {
-  "name": "typescript-vuejs",
-  "description": "A Vue.js project",
+  "name": "{{ name }}",
+  "description": "{{ description }}",
   "version": "1.0.0",
-  "author": "Gabriel Rissi <gabriel2012rissi@gmail.com>",
-  "license": "MIT",
+  "author": "{{ author }}",
+  "license": "{{ license }}",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --watch",
