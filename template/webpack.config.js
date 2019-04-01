@@ -1,8 +1,10 @@
 var path = require('path')
 var webpack = require('webpack')
+var VueLoaderPlugin = require('vue-loader/lib/plugin')
+var browserSyncPlugin = require('browser-sync-webpack-plugin')
 
 module.exports = {
-  entry: './src/main.js',
+  entry: './src/main.ts',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
@@ -32,8 +34,7 @@ module.exports = {
           'css-loader',
           'sass-loader?indentedSyntax'
         ],
-      },
-      {{/sass}}
+      },{{/sass}}
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -54,14 +55,14 @@ module.exports = {
               'sass-loader?indentedSyntax'
             ]
             {{/sass}}
-          }
-          // other vue-loader options go here
         }
       },
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
+        test: /\.ts$/,
+        loader: "ts-loader",
+        options: {
+          appendTsSuffixTo: [/\.vue$/]
+        }
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -76,17 +77,26 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js'
     },
-    extensions: ['*', '.js', '.vue', '.json']
+    extensions: ['*', '.ts', '.js', '.vue', '.json']
   },
   devServer: {
     historyApiFallback: true,
     noInfo: true,
-    overlay: true
+    overlay: false
   },
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  plugins: [
+    // make sure to include the plugin!
+    new VueLoaderPlugin(),
+    new browserSyncPlugin({
+      host: 'localhost',
+      port: 3000,
+      proxy: 'http://localhost:8080/'
+    })
+  ]
 }
 
 if (process.env.NODE_ENV === 'production') {
