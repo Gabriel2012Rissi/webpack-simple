@@ -41,7 +41,7 @@ import Component from 'vue-class-component';
 
 @Component({})
 export default class App extends Vue {
-  msg = "Hello World!!"
+  msg = "Hello World!"
 }
 </script>
 

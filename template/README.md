@@ -1,6 +1,6 @@
-# typescript-vuejs
+# {{ name }}
 
-> A Vue.js project
+> {{ description }}
 
 ## Build Setup
 
